@@ -24,6 +24,7 @@ function Monti() {
   this.actualFrame = 0;
   this.images = [];
   this.changed = false;
+  this.animations = 6;
 
   this.display = function(xpos, ypos, actualSeconds) {
     this.changeAnimation(actualSeconds);
@@ -58,6 +59,7 @@ function Monti() {
     this.standStill();
   }
 
+  // Animations
   this.standStill = function() {
     this.loadFrames([7, 7, 8, 8, 9, 9, 10, 10]);
   }
@@ -77,9 +79,13 @@ function Monti() {
   this.worry = function() {
     this.loadFrames([5, 6]);
   }
+  
+  this.lookUp = function() {
+    this.loadFrames([7, 8, 9, 10, 11, 11, 11, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 11, 11, 11, 11, 10, 9, 8, 7]);
+  }
 
   this.randomAnimation = function() {
-    var animation = floor(random(5));
+    var animation = floor(random(this.animations));
     console.log("Chosen Animation: " + animation);
     switch(animation) {
     case 0:
@@ -101,6 +107,10 @@ function Monti() {
     case 4:
       this.worry();
       console.log("worry");
+      break;
+    case 5:
+      this.lookUp();
+      console.log("lookUp");
       break;
     default:
       break;
