@@ -34,8 +34,7 @@ function Monti() {
 
   this.changeAnimation = function(actualSeconds) {
     if (actualSeconds % 5 == 0 && !this.changed){
-      //this.randomAnimation();
-      this.cries();
+      this.randomAnimation();
       this.changed = true;
     }else if (actualSeconds % 5 == 1){
       this.changed = false;
