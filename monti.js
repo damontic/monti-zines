@@ -23,6 +23,7 @@ function Monti() {
   this.frames = [];
   this.actualFrame = 0;
   this.images = [];
+  this.changed = false;
 
   this.display = function(xpos, ypos, actualSeconds) {
     this.changeAnimation(actualSeconds);
@@ -31,14 +32,12 @@ function Monti() {
   }
 
   this.changeAnimation = function(actualSeconds) {
-    if (actualSeconds < 5)
-      this.standStill();
-    else if (actualSeconds >= 5 && actualSeconds < 10)
-      this.speak();
-    else if (actualSeconds >= 10 && actualSeconds < 15)
-      this.standStill();
-    else
-      exit();
+    if (actualSeconds % 5 == 0 && !this.changed){
+      this.randomAnimation();
+      this.changed = true;
+    }else if (actualSeconds % 5 == 1){
+      this.changed = false;
+    }
   }
 
 
@@ -53,7 +52,6 @@ function Monti() {
     var id = 0;
     while (id < this.imageNumber) {
       filename = "assets/" + nf(id, 2) + ".png";
-      console.log("Loading file: " + filename);
       this.images.push(loadImage(filename)); 
       id++;
     }
@@ -78,6 +76,35 @@ function Monti() {
 
   this.worry = function() {
     this.loadFrames([5, 6]);
+  }
+
+  this.randomAnimation = function() {
+    var animation = floor(random(5));
+    console.log("Chosen Animation: " + animation);
+    switch(animation) {
+    case 0:
+      this.standStill();
+      console.log("standStill");
+      break;
+    case 1:
+      this.down();
+      console.log("down");
+      break;
+    case 2:
+      this.closeEyes();
+      console.log("closeEyes");
+      break;
+    case 3:
+      this.speak();
+      console.log("speak");
+      break;
+    case 4:
+      this.worry();
+      console.log("worry");
+      break;
+    default:
+      break;
+    }
   }
 
   this.init();
